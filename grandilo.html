@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Sansita&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get API</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: 'Sansita', sans-serif;
+      }
+    </style>
+    <div class="container">
+      <h1 class="display-4 mb-4">Fetch Dribbble API</h1>
+      <div class="d-flex"><button class="btn btn-primary mr-4" id="displayUser">Get USer API</button><br /></div>
+
+      <div id="output"></div>
+    </div>
+
+    <script>
+      document.getElementById('displayUser').addEventListener('click', displayUser);
+
+      function displayUser() {
+        fetch('https://reqres.in/api/users?page=2')
+          .then((res) => res.json())
+          .then((res) => {
+            let output = '<h2>USERS</h2>';
+            res.data.forEach((user) => {
+              //   console.log(user.email);
+              output += `
+                <ul>
+                    <li><b>ID:</b> ${user.id}</li>
+                    <li><b>First Name:</b> ${user.first_name}</li>
+                    <li><b>Last Name:</b> ${user.last_name}</li>
+                    <li><b>Email:</b> ${user.email}</>
+                    <li><b>Avatar:</b> ${user.avatar}</li>
+                </ul>
+              `;
+            });
+            document.getElementById('output').innerHTML = output;
+          });
+      }
+    </script>
+  </body>
+</html>
